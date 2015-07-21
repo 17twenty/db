@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! /usr/bin/python
 # vim: ts=4 et sw=4 sts=4 syntax=python
 
 """db2sqlite
@@ -76,7 +76,10 @@ def sqlite_import(table, ddl, outfile):
     print >> sql, '.import /dev/stdin %s' % table
     sql.close()
 
-    status = subprocess.call(['sqlite3', outfile, '-init', tmpfile])
+    devnull = open(os.devnull, 'w')
+    status = subprocess.call(['sqlite3', outfile, '-init', tmpfile],
+                             stdout=devnull)
+    devnull.close()
 
     os.unlink(tmpfile)
 

@@ -38,13 +38,11 @@ Output usage and exit.
 .TP
 \fB\-k\fR, \fB\-\-key\fR \fIJSONPATH[+[OPTIONS]]\fR
 Evaluate the JSONPath expression \fIJSONPATH\fR on each record and sort by the
-resulting values. Additional sort \fIOPTIONS\fR (e.g., \(lqr\(rq for reverse)
-can be specified using a plus followed by the option letter(s). There is no
-need to specify numeric sort options like \(lqg\(rq and \(lqn\(rq; these
-options are added automatically based on the result type. This option can be
-used multiple times to sort by multiple values. Note that additional sort
-options will likely not behave correctly if the JSONPath expression returns a
-list or object. See sort(1).
+resulting values. Additional sort \fIOPTIONS\fR (e.g., \(lqn\(rq for numeric or
+\(lqr\(rq for reverse) can be specified using a plus followed by the option
+letter(s). This option can be used multiple times to sort by multiple values.
+Note that additional sort options will likely not behave correctly if the
+JSONPath expression returns a list or object. See sort(1).
 .TP
 \fB\-\-files-from\fR \fIPATH\fR
 Read a list of input files from \fIPATH\fR. If \fIPATH\fR is equal to
