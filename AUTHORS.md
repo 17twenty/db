@@ -1,7 +1,7 @@
 Authors
 =======
 
-db was primarily written and is maintained by Curt Hash <chash@lanl.gov>.
+db was primarily written and is maintained by Curt Hash.
 
 Contributors
 ============

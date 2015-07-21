@@ -482,7 +482,7 @@ def get_interval(indexer, path):
     if status != 0:
         raise ValueError('%s exited with status %d' % (indexer, status))
 
-    _, min_time, max_time = stdout.splitlines()[0].rstrip().split('|')
+    min_time, max_time = stdout.splitlines()[0].rstrip().split()
 
     return (path, float(min_time), float(max_time))
 
@@ -547,7 +547,7 @@ class DataSourceDescriptor(object):
 
         if begin or end:
             # Index over some fuzzy time period.
-            paths = self.fuzzy_search(begin, end)
+            paths = (i[0] for i in self.fuzzy_search(begin, end))
         else:
             # Index all files.
             paths = self.find()
@@ -556,7 +556,7 @@ class DataSourceDescriptor(object):
         pool = multiprocessing.Pool(processes)
         results = []
 
-        for path, _, _ in paths:
+        for path in paths:
             # Distribute jobs to the pool.
             if not index.indexed(path):
                 args = (self.indexer, path)

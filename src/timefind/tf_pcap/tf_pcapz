@@ -34,4 +34,4 @@
 #
 # Author: Curt Hash <chash@lanl.gov>
 
-zcat "$1" | tf_pcap - | awk -F'|' "BEGIN {OFS=\"|\";} {print \"$1\", \$2, \$3}"
+zcat "$1" | tf_pcap -

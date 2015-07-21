@@ -63,7 +63,7 @@ main(int argc, char **argv) {
 
   struct timeval max = pcap.ts;
 
-  printf("%s|%f|%f\n", argv[1], timeval2epoch(&min), timeval2epoch(&max));
+  printf("%f\t%f\n", timeval2epoch(&min), timeval2epoch(&max));
 
   return 0;
 }
