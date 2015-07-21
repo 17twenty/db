@@ -137,11 +137,15 @@ EXTRACTORS = {
 }
 
 
-def extract_smart(path):
-    """Attempts to automagically extract a datetime from `path`. """
-    tokens = [t for t in RE_SEPARATORS.split(os.path.basename(path))
-              if RE_TIME_TOKEN.match(t)]
+def extract_smart(string):
+    """Attempts to automagically extract a datetime from `string`. """
+    if string[0] == '@':
+        try:
+            return datetime.datetime.fromtimestamp(float(string[1:]))
+        except ValueError:
+            pass
 
+    tokens = [t for t in RE_SEPARATORS.split(string) if RE_TIME_TOKEN.match(t)]
     timestr = ' '.join(tokens)
     if not timestr:
         raise ValueError('empty timestr')
@@ -616,7 +620,7 @@ class DataSourceDescriptor(object):
         # Find all files within this set of files and partition them into
         # (hopefully) non-overlapping time series.
         for path in self.find():
-            file_time = extract_dtime(path, self.extractor)
+            file_time = extract_dtime(os.path.basename(path), self.extractor)
             if not file_time:
                 # Extraction failed.
                 continue
