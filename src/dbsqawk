@@ -485,6 +485,10 @@ class Function(object):
         if self.function in ['length', 'int']:
             return 'int'
 
+        if self.function in ['atan2', 'cos', 'exp', 'log', 'rand', 'sin',
+                             'sqrt']:
+            return 'real'
+
         if self.function in ['abs', 'max', 'min']:
             types = set(arg.datatype(schema) for arg in self.args)
 
@@ -576,7 +580,7 @@ def grammar(gawk=False):
 
     if gawk:
         # Define gawk-specific functions.
-        functions += ' strftime submatch'
+        functions += ' strftime submatch atan2 cos exp log rand sin sqrt'
 
     functions = split_keywords(functions)
     function_name = Or(functions.values())
