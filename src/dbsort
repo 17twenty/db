@@ -231,9 +231,13 @@ do
 	COL_TYPE="${SCHEMA_TYPES["$COL_NAME"]}"
 	case "$COL_TYPE" in
 		int)
-			OPT="${OPT}n"
+			# Sort integer columns with -n if -g was not given.
+			if [[ ${TOKENS[1]} != *g* ]]; then
+				OPT="${OPT}n"
+			fi
 			;;
 		real)
+			# Sort real columns with -g.
 			OPT="${OPT}g"
 			;;
 	esac
